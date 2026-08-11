@@ -1,7 +1,7 @@
 ---
 phase: 01
 slug: foundation-auth
-status: draft
+status: planned
 nyquist_compliant: false
 wave_0_complete: false
 created: 2026-08-11
@@ -38,16 +38,28 @@ created: 2026-08-11
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 01-01-01 | 01 | 0 | infra | setup | `npx jest --version` | ❌ W0 | ⬜ pending |
-| 01-0N-0N | TBD | TBD | AUTH-01 | unit+hook | `npx jest src/features/auth/schemas.test.ts src/features/auth/api.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
-| 01-0N-0N | TBD | TBD | AUTH-02 | unit+store | `npx jest src/lib/secure-store.test.ts src/stores/session-store.test.ts src/features/auth/api.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
-| 01-0N-0N | TBD | TBD | AUTH-03 | unit+component | `npx jest src/features/profile --watchAll=false` | ❌ W0 | ⬜ pending |
-| 01-0N-0N | TBD | TBD | AUTH-04 | unit | `npx jest src/features/profile/logout.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
-| 01-0N-0N | TBD | TBD | AUTH-05 | unit+component | `npx jest src/features/profile/api.test.ts src/features/profile/components/ChangePasswordForm.test.tsx --watchAll=false` | ❌ W0 | ⬜ pending |
-| 01-0N-0N | TBD | TBD | AUTH-06 | component (fake timers) | `npx jest src/features/auth/components/SessionExpiryBanner.test.tsx --watchAll=false` | ❌ W0 | ⬜ pending |
-| 01-0N-0N | TBD | TBD | cross-cutting | unit | `npx jest src/api/http-client.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-01-T1/T2 | 01 | 1 | infra (scaffold) | setup | `npx expo config --json` | n/a | ⬜ pending |
+| 01-02-T1 | 02 | 2 | infra (test tooling) | setup | `npx jest src/test-utils/smoke.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-02-T2/T3 | 02 | 2 | infra (theme/components/fixtures/types) | typecheck+unit | `npx tsc --noEmit && npm test` | ❌ W0 | ⬜ pending |
+| 01-03-T1 | 03 | 3 | AUTH-02 | unit+store | `npx jest src/lib/secure-store.test.ts src/stores/session-store.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-03-T2 | 03 | 3 | cross-cutting (401) | unit | `npx jest src/api/http-client.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-04-T1 | 04 | 4 | AUTH-01 | unit | `npx jest src/features/auth/schemas.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-04-T2 | 04 | 4 | AUTH-01, AUTH-02 | hook | `npx jest src/features/auth/api.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-04-T3 | 04 | 4 | AUTH-01, AUTH-02 | typecheck+suite | `npx tsc --noEmit && npx jest src/features/auth --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-05-T1 | 05 | 5 | AUTH-06 | component (fake timers) | `npx jest src/features/auth/components/SessionExpiryBanner.test.tsx --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-05-T2 | 05 | 5 | AUTH-02 (shell) | typecheck+suite | `npx tsc --noEmit && npm test` | ❌ W0 | ⬜ pending |
+| 01-06-T1 | 06 | 6 | AUTH-03 | hook | `npx jest src/features/profile/api.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-06-T2 | 06 | 6 | AUTH-03 | component | `npx jest src/features/profile --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-06-T3 | 06 | 6 | AUTH-04 | unit | `npx jest src/features/profile/logout.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-07-T1 | 07 | 7 | AUTH-05 | unit+hook | `npx jest src/features/profile/api.test.ts --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-07-T2 | 07 | 7 | AUTH-05 | component | `npx jest src/features/profile/api.test.ts src/features/profile/components/ChangePasswordForm.test.tsx --watchAll=false` | ❌ W0 | ⬜ pending |
+| 01-08-T1 | 08 | 8 | AUTH-01..06 (gate) | typecheck+suite+manifest | `npx tsc --noEmit && npm test && grep -A1 "com.google.android.geo.API_KEY" android/app/src/main/AndroidManifest.xml` | ❌ W0 | ⬜ pending |
+| 01-08-T2 | 08 | 8 | maps key (human) | manual | Google Cloud Console — no gcloud CLI on this machine | n/a | ⬜ pending |
+| 01-08-T3 | 08 | 8 | AUTH-01..06 | manual on device | `npx expo run:android` + 10-step flow; `adb shell pm list packages \| grep com.goride.rider` | n/a | ⬜ pending |
 
-*Exact Task IDs filled in once the planner assigns plan/wave numbers — the requirement→test mapping above is locked from research and must not be dropped during planning.*
+**Wave 0 mapping:** this phase's "Wave 0" (project scaffold + Jest/RNTL + test-utils + theme/components) is delivered by plans 01-01 (execution wave 1) and 01-02 (execution wave 2). No feature-logic plan runs before both are green.
+
+*Task IDs assigned during planning on 2026-08-11. Every row of the original requirement→test mapping is preserved and claimed by exactly one task.*
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 

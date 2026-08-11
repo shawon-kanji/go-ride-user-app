@@ -20,7 +20,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Phase Details
 
 ### Phase 1: Foundation & Auth
-**Goal**: Rider can create an account, securely stay logged in, manage their profile, and is warned before a session lapse rather than silently kicked out — with project scaffolding, shared theme/components, test tooling, and the Google Maps key all verified against a real production build before later phases depend on them.
+**Goal**: Rider can create an account, securely stay logged in, manage their profile, and is warned before a session lapse rather than silently kicked out — with project scaffolding, shared theme/components, test tooling, and the Google Maps key all verified against a real local Android debug build (`npx expo run:android`; this project does not use EAS — see 01-RESEARCH.md Pitfall 3) before later phases depend on them.
 **Depends on**: Nothing (first phase)
 **Requirements**: AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 **Success Criteria** (what must be TRUE):
@@ -29,7 +29,17 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Rider can view and edit their profile (first/last name) and change their password
   4. Rider can log out from the app
   5. Rider sees a proactive warning before their session/JWT expires, rather than being silently force-logged-out (most critical while a trip is being tracked)
-**Plans**: TBD
+**Plans**: 8 plans across 8 waves (sequential — each builds on the previous; 01-01 + 01-02 are the Wave 0 infrastructure that must complete before any feature-logic plan)
+
+Plans:
+- [ ] 01-01-PLAN.md — Expo SDK 57 scaffold, locked dependency set, app.config.js with resolved Google Maps key (package com.goride.rider)
+- [ ] 01-02-PLAN.md — Jest + RNTL install/config, test-utils, rider API type contracts, theme + UI primitives copied from go-ride-driver-app
+- [ ] 01-03-PLAN.md — JWT expiry decoder, secure token storage, Zustand session store, apiRequest with centralized 401 handling, three typed rider clients
+- [ ] 01-04-PLAN.md — Auth zod schemas, login/signup mutations (signup→login chain), forms, (auth) route group
+- [ ] 01-05-PLAN.md — SessionExpiryBanner (AUTH-06), root hydration gate + Stack.Protected guard, Home + Profile tabs, Home placeholder
+- [ ] 01-06-PLAN.md — Profile query/mutation, AccountStatusBadge (2-value), ProfileView, EditProfileForm, logout, profile routes
+- [ ] 01-07-PLAN.md — changePasswordSchema, useChangePasswordMutation, ChangePasswordForm + route
+- [ ] 01-08-PLAN.md — Phase gate: full suite + prebuild + manifest key check, debug SHA-1 registration (checkpoint), end-to-end verification on a real Android build (checkpoint)
 
 ### Phase 2: Fare Estimate & Booking
 **Goal**: Rider can get a trustworthy fare quote and book a cab against it exactly once, with no duplicate-booking risk from retries or double-taps.
@@ -70,7 +80,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Auth | 0/TBD | Not started | - |
+| 1. Foundation & Auth | 0/8 | Not started | - |
 | 2. Fare Estimate & Booking | 0/TBD | Not started | - |
 | 3. Realtime Trip Tracking | 0/TBD | Not started | - |
 | 4. Trip Lifecycle & Completion | 0/TBD | Not started | - |
