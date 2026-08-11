@@ -5,6 +5,7 @@ export default function ProfileLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ title: 'Profile', headerShown: false }} />
       <Stack.Screen name="edit" options={{ title: 'Edit profile' }} />
+      <Stack.Screen name="change-password" options={{ title: 'Change password' }} />
     </Stack>
   );
 }
