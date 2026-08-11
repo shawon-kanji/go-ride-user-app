@@ -52,7 +52,7 @@ describe('SessionExpiryBanner', () => {
 
     expect(screen.getByText(/Session ending in 4 min/)).toBeTruthy();
 
-    fireEvent.press(screen.getByText('✕'));
+    await fireEvent.press(screen.getByText('✕'));
 
     expect(screen.toJSON()).toBeNull();
   });
@@ -61,10 +61,10 @@ describe('SessionExpiryBanner', () => {
     useSessionStore.setState({ tokenExpiresAt: Date.now() + 4 * 60 * 1000 });
 
     await render(<SessionExpiryBanner />);
-    fireEvent.press(screen.getByText('✕'));
+    await fireEvent.press(screen.getByText('✕'));
     expect(screen.toJSON()).toBeNull();
 
-    act(() => {
+    await act(() => {
       useSessionStore.setState({ tokenExpiresAt: Date.now() + 3 * 60 * 1000 });
     });
 
@@ -78,7 +78,7 @@ describe('SessionExpiryBanner', () => {
 
     expect(screen.toJSON()).toBeNull();
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(2 * 60 * 1000);
     });
 
