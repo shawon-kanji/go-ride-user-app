@@ -26,19 +26,26 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@react-native/jest-preset": "^0.86.2",
+    "@testing-library/react-native": "^14.0.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.10.2",
     "@types/react": "~19.2.2",
     "babel-preset-expo": "^57.0.5",
     "dotenv": "^17.2.1",
     "eslint": "^9.0.0",
     "eslint-config-expo": "~57.0.1",
+    "jest": "~29.7.0",
+    "jest-expo": "~57.0.4",
     "tailwindcss": "^3.4.19",
+    "test-renderer": "^1.2.0",
     "typescript": "~6.0.3"
   },
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "test": "jest --watchAll=false"
   },
   "private": true
 }
