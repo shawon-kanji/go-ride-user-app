@@ -1,20 +1,30 @@
 jest.mock('../../api/profile-client', () => ({
-  profileClient: { getProfile: jest.fn(), updateProfile: jest.fn() },
+  profileClient: { getProfile: jest.fn(), updateProfile: jest.fn(), changePassword: jest.fn() },
 }));
 
 import { act, renderHook, waitFor } from '@testing-library/react-native';
 
+import { ApiError } from '../../api/http-client';
 import { profileClient } from '../../api/profile-client';
+import { useSessionStore } from '../../stores/session-store';
 import { createQueryWrapper, createTestQueryClient } from '../../test-utils/query-wrapper';
-import { makeUser } from '../../test-utils/auth-fixtures';
-import { profileKeys, useProfileQuery, useUpdateProfileMutation } from './api';
+import { makeJwt, makeUser } from '../../test-utils/auth-fixtures';
+import { changePasswordSchema } from './schemas';
+import {
+  profileKeys,
+  useChangePasswordMutation,
+  useProfileQuery,
+  useUpdateProfileMutation,
+} from './api';
 
 const mockGetProfile = profileClient.getProfile as jest.Mock;
 const mockUpdateProfile = profileClient.updateProfile as jest.Mock;
+const mockChangePassword = profileClient.changePassword as jest.Mock;
 
 beforeEach(() => {
   mockGetProfile.mockReset();
   mockUpdateProfile.mockReset();
+  mockChangePassword.mockReset();
 });
 
 describe('useProfileQuery', () => {
@@ -106,5 +116,112 @@ describe('useUpdateProfileMutation', () => {
     });
 
     expect(client.getQueryData(profileKeys.detail())).toEqual(seeded);
+  });
+});
+
+describe('useChangePasswordMutation', () => {
+  const seedAuthenticatedSession = () => {
+    const token = makeJwt(Date.now() + 60 * 60 * 1000);
+    useSessionStore.setState({
+      status: 'authenticated',
+      token,
+      tokenExpiresAt: Date.now() + 60 * 60 * 1000,
+      user: makeUser(),
+      sessionExpiredReason: null,
+    });
+    return token;
+  };
+
+  it('calls profileClient.changePassword with exactly {old_password, new_password}', async () => {
+    mockChangePassword.mockResolvedValue({ message: 'Password changed' });
+
+    const client = createTestQueryClient();
+    const { result } = await renderHook(() => useChangePasswordMutation(), {
+      wrapper: createQueryWrapper(client),
+    });
+
+    await act(async () => {
+      await result.current.mutateAsync({ old_password: 'oldpass1', new_password: 'newpass1' });
+    });
+
+    const callArg = mockChangePassword.mock.calls[0][0];
+    expect(Object.keys(callArg).sort()).toEqual(['new_password', 'old_password']);
+  });
+
+  it('leaves the session store unchanged on success — no forced re-login', async () => {
+    mockChangePassword.mockResolvedValue({ message: 'Password changed' });
+    const token = seedAuthenticatedSession();
+
+    const client = createTestQueryClient();
+    const { result } = await renderHook(() => useChangePasswordMutation(), {
+      wrapper: createQueryWrapper(client),
+    });
+
+    await act(async () => {
+      await result.current.mutateAsync({ old_password: 'oldpass1', new_password: 'newpass1' });
+    });
+
+    expect(useSessionStore.getState().status).toBe('authenticated');
+    expect(useSessionStore.getState().token).toBe(token);
+  });
+
+  it('resolves to the bare {message} — not wrapped in {user}', async () => {
+    mockChangePassword.mockResolvedValue({ message: 'Password changed' });
+
+    const client = createTestQueryClient();
+    const { result } = await renderHook(() => useChangePasswordMutation(), {
+      wrapper: createQueryWrapper(client),
+    });
+
+    let response: { message: string } | undefined;
+    await act(async () => {
+      response = await result.current.mutateAsync({
+        old_password: 'oldpass1',
+        new_password: 'newpass1',
+      });
+    });
+
+    expect(response?.message).toBe('Password changed');
+    expect((response as { user?: unknown })?.user).toBeUndefined();
+  });
+
+  it('surfaces an ApiError on rejection and leaves the session authenticated', async () => {
+    seedAuthenticatedSession();
+    mockChangePassword.mockRejectedValue(
+      new ApiError(400, { code: 'invalid_password', message: 'Current password is incorrect' }),
+    );
+
+    const client = createTestQueryClient();
+    const { result } = await renderHook(() => useChangePasswordMutation(), {
+      wrapper: createQueryWrapper(client),
+    });
+
+    await act(async () => {
+      await expect(
+        result.current.mutateAsync({ old_password: 'wrongpass', new_password: 'newpass1' }),
+      ).rejects.toThrow('Current password is incorrect');
+    });
+
+    expect(useSessionStore.getState().status).toBe('authenticated');
+  });
+});
+
+describe('changePasswordSchema', () => {
+  it('rejects an old_password shorter than 8 chars', () => {
+    const result = changePasswordSchema.safeParse({ old_password: 'short', new_password: 'longenough1' });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects a new_password shorter than 8 chars', () => {
+    const result = changePasswordSchema.safeParse({ old_password: 'longenough1', new_password: 'short' });
+    expect(result.success).toBe(false);
+  });
+
+  it('accepts two valid 8+ char passwords', () => {
+    const result = changePasswordSchema.safeParse({
+      old_password: 'longenough1',
+      new_password: 'longenough2',
+    });
+    expect(result.success).toBe(true);
   });
 });
