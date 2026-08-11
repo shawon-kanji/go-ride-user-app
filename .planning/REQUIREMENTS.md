@@ -10,7 +10,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Authentication & Profile
 
 - [ ] **AUTH-01**: Rider can sign up with email + password
-- [x] **AUTH-02**: Rider can log in and stay logged in across app restarts (session persisted via secure storage)
+- [ ] **AUTH-02**: Rider can log in and stay logged in across app restarts (session persisted via secure storage)
 - [ ] **AUTH-03**: Rider can view and edit their profile (first/last name) — note: `GET /api/v1/me` and `PATCH /api/v1/profile` both wrap the response as `{"user": {...}}`, not a bare object
 - [ ] **AUTH-04**: Rider can log out
 - [ ] **AUTH-05**: Rider can change their password (`POST /api/v1/change-password`)
@@ -75,7 +75,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | AUTH-01 | Phase 1 | Pending |
-| AUTH-02 | Phase 1 | Complete |
+| AUTH-02 | Phase 1 | Pending |
 | AUTH-03 | Phase 1 | Pending |
 | AUTH-04 | Phase 1 | Pending |
 | AUTH-05 | Phase 1 | Pending |
