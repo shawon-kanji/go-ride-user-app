@@ -82,7 +82,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-06 | Phase 1 | Pending |
 | RIDE-01 | Phase 2 | Pending |
 | RIDE-02 | Phase 2 | Pending |
-| RIDE-03 | Phase 2 | Pending |
+| RIDE-03 | Phase 3 | Pending |
 | TRACK-01 | Phase 3 | Pending |
 | TRACK-02 | Phase 3 | Pending |
 | TRACK-03 | Phase 3 | Pending |
@@ -98,6 +98,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 - Mapped to phases: 18
 - Unmapped: 0 ✓
 
+**Note:** RIDE-03 (cancel a pending/ongoing trip) was moved from Phase 2 to Phase 3 during roadmap creation — its always-reachable cancel affordance and immediate-reflection behavior (see TRACK-06) both depend on the pending-trip screen and rank-guarded trip-state reducer that are Phase 3 deliverables, not Phase 2's quote/booking flow. See .planning/STATE.md Decisions.
+
 ---
 *Requirements defined: 2026-08-11*
-*Last updated: 2026-08-11 after initial definition*
+*Last updated: 2026-08-11 after roadmap creation*
