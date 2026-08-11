@@ -80,7 +80,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Auth | 2/8 | In Progress|  |
+| 1. Foundation & Auth | 3/8 | In Progress|  |
 | 2. Fare Estimate & Booking | 0/TBD | Not started | - |
 | 3. Realtime Trip Tracking | 0/TBD | Not started | - |
 | 4. Trip Lifecycle & Completion | 0/TBD | Not started | - |
