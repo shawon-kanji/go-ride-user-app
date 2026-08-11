@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-04-PLAN.md
-last_updated: "2026-08-11T11:49:55.473Z"
+stopped_at: Completed 01-05-PLAN.md
+last_updated: "2026-08-11T11:54:57.000Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 8
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State
@@ -24,15 +24,15 @@ See: .planning/PROJECT.md (updated 2026-08-11)
 ## Current Position
 
 Phase: 01 (foundation-auth) — EXECUTING
-Plan: 5 of 8
+Plan: 6 of 8
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 6 min
-- Total execution time: 0.4 hours
+- Total execution time: 0.5 hours
 
 **By Phase:**
 
@@ -42,10 +42,11 @@ Plan: 5 of 8
 | Phase 01-foundation-auth P02 | 10min | 3 tasks | 19 files |
 | Phase 01 P03 | 5min | 2 tasks | 10 files |
 | Phase 01 P04 | 5min | 3 tasks | 9 files |
+| Phase 01 P05 | 5min | 2 tasks | 6 files |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (4min), 01-02 (10min), 01-03 (5min), 01-04 (5min)
+- Last 5 plans: 01-01 (4min), 01-02 (10min), 01-03 (5min), 01-04 (5min), 01-05 (5min)
 - Trend: -
 
 *Updated after each plan completion*
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-auth]: Reworded two comments in src/api/types.ts to avoid literal substrings 'is_email_verified'/'pending' that 01-02's own acceptance-criteria grep checks forbade, since the plan's literal code block and its verify script were mutually inconsistent
 - [Phase 01-foundation-auth]: Reworded session-store.ts's driver-app-derived 'No zustand/persist' comment to 'No persistence middleware' — the plan's own literal comment text and its acceptance-criteria grep for the substring 'zustand/persist' were mutually inconsistent, same class of issue as 01-02's types.ts fix
 - [Phase 01-foundation-auth]: AUTH-01 marked complete from plan 01-04 (signup->login chain produces an authenticated session); AUTH-02 intentionally left pending until 01-05's app-shell hydration gate.
+- [Phase 01-foundation-auth]: AUTH-02 and AUTH-06 marked complete from plan 01-05 — root layout's hydration gate + Stack.Protected guard makes session persistence observable end-to-end, and SessionExpiryBanner (7 tests) delivers the proactive pre-expiry warning.
+- [Phase 01-foundation-auth]: RNTL v14's `fireEvent.press`/`act` are async and return thenables that must be awaited — un-awaited calls in component tests let assertions read stale render output; applies to any future component test in this repo, not just SessionExpiryBanner.
 
 ### Pending Todos
 
@@ -78,6 +81,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-08-11T11:49:55.468Z
-Stopped at: Completed 01-04-PLAN.md
+Last session: 2026-08-11T11:54:57.000Z
+Stopped at: Completed 01-05-PLAN.md
 Resume file: None
