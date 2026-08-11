@@ -13,7 +13,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **AUTH-02**: Rider can log in and stay logged in across app restarts (session persisted via secure storage)
 - [x] **AUTH-03**: Rider can view and edit their profile (first/last name) — note: `GET /api/v1/me` and `PATCH /api/v1/profile` both wrap the response as `{"user": {...}}`, not a bare object
 - [x] **AUTH-04**: Rider can log out
-- [ ] **AUTH-05**: Rider can change their password (`POST /api/v1/change-password`)
+- [x] **AUTH-05**: Rider can change their password (`POST /api/v1/change-password`)
 - [x] **AUTH-06**: Rider sees a proactive session-expiry warning before the JWT hard-expires — no refresh-token endpoint exists, so this is a client-side mitigation, most critical while an active trip is being tracked
 
 ### Ride Booking
@@ -78,7 +78,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-02 | Phase 1 | Complete |
 | AUTH-03 | Phase 1 | Complete |
 | AUTH-04 | Phase 1 | Complete |
-| AUTH-05 | Phase 1 | Pending |
+| AUTH-05 | Phase 1 | Complete |
 | AUTH-06 | Phase 1 | Complete |
 | RIDE-01 | Phase 2 | Pending |
 | RIDE-02 | Phase 2 | Pending |

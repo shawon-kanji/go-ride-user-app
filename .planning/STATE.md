@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-06-PLAN.md
-last_updated: "2026-08-11T12:05:15.000Z"
+stopped_at: Completed 01-07-PLAN.md
+last_updated: "2026-08-11T12:14:17.600Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 8
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # Project State
@@ -24,15 +24,15 @@ See: .planning/PROJECT.md (updated 2026-08-11)
 ## Current Position
 
 Phase: 01 (foundation-auth) — EXECUTING
-Plan: 7 of 8
+Plan: 8 of 8
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 6 min
-- Total execution time: 0.6 hours
+- Total execution time: 0.7 hours
 
 **By Phase:**
 
@@ -44,10 +44,11 @@ Plan: 7 of 8
 | Phase 01 P04 | 5min | 3 tasks | 9 files |
 | Phase 01 P05 | 5min | 2 tasks | 6 files |
 | Phase 01 P06 | 8min | 3 tasks | 13 files |
+| Phase 01 P07 | 6min | 2 tasks | 7 files |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-02 (10min), 01-03 (5min), 01-04 (5min), 01-05 (5min), 01-06 (8min)
+- Last 5 plans: 01-03 (5min), 01-04 (5min), 01-05 (5min), 01-06 (8min), 01-07 (6min)
 - Trend: -
 
 *Updated after each plan completion*
@@ -73,6 +74,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-auth]: `AccountStatusBadge` written fresh with the rider's real 2-value `AccountStatus` union rather than adapted from the driver app's 3-value one — avoids 01-RESEARCH.md's Pitfall 2 by construction.
 - [Phase 01-foundation-auth]: `createTestQueryClient()`'s `gcTime: 0` on queries means a cache entry written via `setQueryData`/mutation `onSuccess` with no active query observer is eligible for immediate GC on a real `setTimeout(0)` — flaky under full-suite timing though stable in isolation; any future test asserting post-mutation cache state should keep an active `useQuery` observer mounted alongside the mutation, mirroring real component usage.
 - [Phase 01-foundation-auth]: `ProfileView.tsx` already renders a "Change password" button routing to `/(app)/(tabs)/profile/change-password`; plan 01-07 must create that screen and append its entry to `profile/_layout.tsx`'s Stack.
+- [Phase 01-foundation-auth]: AUTH-05 marked complete from plan 01-07 — `changePasswordSchema`/`useChangePasswordMutation` (no onSuccess side effects: no clearSession, no cache invalidation) and a dedicated `ChangePasswordForm` screen/route, all 6 phase-01 AUTH requirements now implemented.
+- [Phase 01-foundation-auth]: Established a "success-state-replaces-form" UI pattern (boolean flag swaps the whole form for a confirmation banner + Back button) for any mutation whose success must be visibly confirmed without an automatic navigation destroying that confirmation.
+- [Phase 01-foundation-auth]: Full suite baseline after 01-07: 72 tests across 13 suites (`npm test` exit 0), `npx tsc --noEmit` exit 0 — this is the number 01-08 uses as its phase-gate starting point.
 
 ### Pending Todos
 
@@ -86,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-08-11T12:05:15.000Z
-Stopped at: Completed 01-06-PLAN.md
+Last session: 2026-08-11T12:14:17.595Z
+Stopped at: Completed 01-07-PLAN.md
 Resume file: None
