@@ -58,16 +58,25 @@ describe('useUpdateProfileMutation', () => {
   });
 
   it('writes the returned {user} envelope into the ["profile"] cache on success', async () => {
+    const initialUser = makeUser();
     const updatedUser = makeUser({ first_name: 'Updated' });
+    mockGetProfile.mockResolvedValue({ user: initialUser });
     mockUpdateProfile.mockResolvedValue({ user: updatedUser });
 
     const client = createTestQueryClient();
-    const { result } = await renderHook(() => useUpdateProfileMutation(), {
-      wrapper: createQueryWrapper(client),
+    // Keep an active query observer (mirrors real ProfileView usage) so the written
+    // cache entry survives gcTime:0 — an unobserved entry is eligible for immediate GC.
+    const { result } = await renderHook(
+      () => ({ query: useProfileQuery(), mutation: useUpdateProfileMutation() }),
+      { wrapper: createQueryWrapper(client) },
+    );
+
+    await waitFor(() => {
+      expect(result.current.query.data).toEqual({ user: initialUser });
     });
 
     await act(async () => {
-      await result.current.mutateAsync({ first_name: 'Updated', last_name: 'Rider' });
+      await result.current.mutation.mutateAsync({ first_name: 'Updated', last_name: 'Rider' });
     });
 
     expect(client.getQueryData(profileKeys.detail())).toEqual({ user: updatedUser });
