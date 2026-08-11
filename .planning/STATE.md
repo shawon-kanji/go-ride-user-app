@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-05-PLAN.md
-last_updated: "2026-08-11T11:54:57.000Z"
+stopped_at: Completed 01-06-PLAN.md
+last_updated: "2026-08-11T12:05:15.000Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 8
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State
@@ -24,15 +24,15 @@ See: .planning/PROJECT.md (updated 2026-08-11)
 ## Current Position
 
 Phase: 01 (foundation-auth) — EXECUTING
-Plan: 6 of 8
+Plan: 7 of 8
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 6 min
-- Total execution time: 0.5 hours
+- Total execution time: 0.6 hours
 
 **By Phase:**
 
@@ -43,10 +43,11 @@ Plan: 6 of 8
 | Phase 01 P03 | 5min | 2 tasks | 10 files |
 | Phase 01 P04 | 5min | 3 tasks | 9 files |
 | Phase 01 P05 | 5min | 2 tasks | 6 files |
+| Phase 01 P06 | 8min | 3 tasks | 13 files |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (4min), 01-02 (10min), 01-03 (5min), 01-04 (5min), 01-05 (5min)
+- Last 5 plans: 01-02 (10min), 01-03 (5min), 01-04 (5min), 01-05 (5min), 01-06 (8min)
 - Trend: -
 
 *Updated after each plan completion*
@@ -68,6 +69,10 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-auth]: AUTH-01 marked complete from plan 01-04 (signup->login chain produces an authenticated session); AUTH-02 intentionally left pending until 01-05's app-shell hydration gate.
 - [Phase 01-foundation-auth]: AUTH-02 and AUTH-06 marked complete from plan 01-05 — root layout's hydration gate + Stack.Protected guard makes session persistence observable end-to-end, and SessionExpiryBanner (7 tests) delivers the proactive pre-expiry warning.
 - [Phase 01-foundation-auth]: RNTL v14's `fireEvent.press`/`act` are async and return thenables that must be awaited — un-awaited calls in component tests let assertions read stale render output; applies to any future component test in this repo, not just SessionExpiryBanner.
+- [Phase 01-foundation-auth]: AUTH-03 and AUTH-04 marked complete from plan 01-06 — Profile view/edit (name only, read-only email, 2-value account-status badge) and logout (clear token + query cache, redirect to Login, no online-status call) both fully tested (18 profile-suite tests + 5 logout tests).
+- [Phase 01-foundation-auth]: `AccountStatusBadge` written fresh with the rider's real 2-value `AccountStatus` union rather than adapted from the driver app's 3-value one — avoids 01-RESEARCH.md's Pitfall 2 by construction.
+- [Phase 01-foundation-auth]: `createTestQueryClient()`'s `gcTime: 0` on queries means a cache entry written via `setQueryData`/mutation `onSuccess` with no active query observer is eligible for immediate GC on a real `setTimeout(0)` — flaky under full-suite timing though stable in isolation; any future test asserting post-mutation cache state should keep an active `useQuery` observer mounted alongside the mutation, mirroring real component usage.
+- [Phase 01-foundation-auth]: `ProfileView.tsx` already renders a "Change password" button routing to `/(app)/(tabs)/profile/change-password`; plan 01-07 must create that screen and append its entry to `profile/_layout.tsx`'s Stack.
 
 ### Pending Todos
 
@@ -81,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-08-11T11:54:57.000Z
-Stopped at: Completed 01-05-PLAN.md
+Last session: 2026-08-11T12:05:15.000Z
+Stopped at: Completed 01-06-PLAN.md
 Resume file: None
