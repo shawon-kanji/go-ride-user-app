@@ -3,7 +3,7 @@ phase: 01
 slug: foundation-auth
 status: planned
 nyquist_compliant: true
-wave_0_complete: false
+wave_0_complete: true
 created: 2026-08-11
 ---
 
@@ -67,11 +67,11 @@ created: 2026-08-11
 
 ## Wave 0 Requirements
 
-- [ ] `package.json` + `jest.config.js` + `babel.config.js` — none exist yet, repo is currently empty (only `.git`, `AGENTS.md`, `BRIEFING.md`, `.planning/`)
-- [ ] `src/test-utils/query-wrapper.tsx` — `createTestQueryClient()`/`createQueryWrapper()`, copy pattern from `go-ride-driver-app`
-- [ ] `src/test-utils/auth-fixtures.ts` — `makeUser()`, `makeLoginResult()`, etc. (rider-shaped, new — no direct driver-app equivalent since driver fixtures are KYC-shaped)
-- [ ] Framework install: `npx expo install jest-expo jest --dev && npm install -D @react-native/jest-preset@^0.86.2 @testing-library/react-native@^14.0.1 test-renderer@^1.2.0 @types/jest`
-- [ ] `expo-secure-store` mock — verify `jest-expo/android` mocks it automatically, confirm with one trivial passing test before relying on it across the session-store test suite
+- [x] `package.json` + `jest.config.js` + `babel.config.js` — installed/created in 01-01 and 01-02
+- [x] `src/test-utils/query-wrapper.tsx` — `createTestQueryClient()`/`createQueryWrapper()`, copied from `go-ride-driver-app`
+- [x] `src/test-utils/auth-fixtures.ts` — `makeUser()`, `makeLoginResult()`, `makeJwt()` (rider-shaped, new)
+- [x] Framework install: `npx expo install jest-expo jest --dev && npm install -D @react-native/jest-preset@^0.86.2 @testing-library/react-native@^14.0.1 test-renderer@^1.2.0 @types/jest`
+- [x] `expo-secure-store` mock — `jest-expo/android`'s native stub did NOT persist values between get/set; explicit `createSecureStoreMock()` registered globally from `jest.setup.js`, proven by `src/test-utils/smoke.test.ts`
 
 ---
 
