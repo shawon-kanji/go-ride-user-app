@@ -12,7 +12,7 @@ Four phases deliver one reliable rider journey end-to-end: create an account and
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Auth** - Rider can sign up, log in, manage their profile, and never get silently logged out mid-trip
+- [x] **Phase 1: Foundation & Auth** - Rider can sign up, log in, manage their profile, and never get silently logged out mid-trip
 - [ ] **Phase 2: Fare Estimate & Booking** - Rider can get a fare quote and book a cab against it exactly once
 - [ ] **Phase 3: Realtime Trip Tracking** - Rider always has an accurate live view of a pending/active trip — including cancelling it — through WebSocket drops and reconnects
 - [ ] **Phase 4: Trip Lifecycle & Completion** - Rider sees the trip through start, final fare, and cash-collection completion in plain language
@@ -32,14 +32,14 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 8 plans across 8 waves (sequential — each builds on the previous; 01-01 + 01-02 are the Wave 0 infrastructure that must complete before any feature-logic plan)
 
 Plans:
-- [ ] 01-01-PLAN.md — Expo SDK 57 scaffold, locked dependency set, app.config.js with resolved Google Maps key (package com.goride.rider)
-- [ ] 01-02-PLAN.md — Jest + RNTL install/config, test-utils, rider API type contracts, theme + UI primitives copied from go-ride-driver-app
-- [ ] 01-03-PLAN.md — JWT expiry decoder, secure token storage, Zustand session store, apiRequest with centralized 401 handling, three typed rider clients
-- [ ] 01-04-PLAN.md — Auth zod schemas, login/signup mutations (signup→login chain), forms, (auth) route group
-- [ ] 01-05-PLAN.md — SessionExpiryBanner (AUTH-06), root hydration gate + Stack.Protected guard, Home + Profile tabs, Home placeholder
-- [ ] 01-06-PLAN.md — Profile query/mutation, AccountStatusBadge (2-value), ProfileView, EditProfileForm, logout, profile routes
-- [ ] 01-07-PLAN.md — changePasswordSchema, useChangePasswordMutation, ChangePasswordForm + route
-- [ ] 01-08-PLAN.md — Phase gate: full suite + prebuild + manifest key check, debug SHA-1 registration (checkpoint), end-to-end verification on a real Android build (checkpoint)
+- [x] 01-01-PLAN.md — Expo SDK 57 scaffold, locked dependency set, app.config.js with resolved Google Maps key (package com.goride.rider)
+- [x] 01-02-PLAN.md — Jest + RNTL install/config, test-utils, rider API type contracts, theme + UI primitives copied from go-ride-driver-app
+- [x] 01-03-PLAN.md — JWT expiry decoder, secure token storage, Zustand session store, apiRequest with centralized 401 handling, three typed rider clients
+- [x] 01-04-PLAN.md — Auth zod schemas, login/signup mutations (signup→login chain), forms, (auth) route group
+- [x] 01-05-PLAN.md — SessionExpiryBanner (AUTH-06), root hydration gate + Stack.Protected guard, Home + Profile tabs, Home placeholder
+- [x] 01-06-PLAN.md — Profile query/mutation, AccountStatusBadge (2-value), ProfileView, EditProfileForm, logout, profile routes
+- [x] 01-07-PLAN.md — changePasswordSchema, useChangePasswordMutation, ChangePasswordForm + route
+- [x] 01-08-PLAN.md — Phase gate: full suite + prebuild + manifest key check, debug SHA-1 registration (checkpoint), end-to-end verification on a real Android build (checkpoint)
 
 ### Phase 2: Fare Estimate & Booking
 **Goal**: Rider can get a trustworthy fare quote and book a cab against it exactly once, with no duplicate-booking risk from retries or double-taps.
@@ -80,7 +80,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Auth | 7/8 | In Progress|  |
+| 1. Foundation & Auth | 8/8 | Complete | 2026-08-12 |
 | 2. Fare Estimate & Booking | 0/TBD | Not started | - |
 | 3. Realtime Trip Tracking | 0/TBD | Not started | - |
 | 4. Trip Lifecycle & Completion | 0/TBD | Not started | - |
