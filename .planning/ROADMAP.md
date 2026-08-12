@@ -49,7 +49,18 @@ Plans:
   1. Rider can select pickup/dropoff and receive a fare estimate with an itemized breakdown
   2. Rider sees a visible countdown against the quote's expiry, and booking against an expired quote is never silently accepted
   3. Rider can book a cab against the quote, and repeated taps or network retries of the same intent never create a duplicate trip
-**Plans**: TBD
+**Plans**: 9 plans across 9 waves (sequential — parallelization is disabled project-wide; 02-01 + 02-02 are the Wave 0 infrastructure, unusually large because this phase adds two new native dependencies and a second backend service, and neither may be assumed working before 02-02's on-device map check passes)
+
+Plans:
+- [ ] 02-01-PLAN.md — Install expo-location + expo-crypto, expo-location config plugin, EXPO_PUBLIC_CAB_API_BASE_URL, and the three missing Jest mocks (expo-crypto, expo-location, react-native-maps)
+- [ ] 02-02-PLAN.md — Native rebuild (`prebuild --clean` + `run:android`) and an on-device bare-MapView smoke test proving react-native-maps works under RN 0.86's New Architecture (checkpoint)
+- [ ] 02-03-PLAN.md — cab-request-handler DTO types, purpose-built cab-client (`{error,message}`, no clearSession-on-401), newIdempotencyKey, booking draft store
+- [ ] 02-04-PLAN.md — useBookingIdempotencyKey (stable across retries), fare-estimate + request-cab mutations (header-only Idempotency-Key), cold-start-safe useRiderId
+- [ ] 02-05-PLAN.md — useCountdown/formatMmSs (anchored, drift-proof), QuoteCountdown, FareBreakdown (conditional surcharge/discount, never surge)
+- [ ] 02-06-PLAN.md — useCurrentLocation (silent denial fallback), LocationPickerMap (tap-to-pin, uncontrolled viewport)
+- [ ] 02-07-PLAN.md — LocationPickerScreen (two-step pickup→dropoff), book/ route subtree, Book tab, real Home entry point, smoke-screen removal
+- [ ] 02-08-PLAN.md — FareQuoteScreen: estimate on mount, live countdown, explicit expiry + manual re-quote, idempotent booking, all three error sentinels, minimal confirmation
+- [ ] 02-09-PLAN.md — Phase gate: full suite + typecheck + lint, device build, real-device walkthrough with a trip_requests row-count duplicate check (checkpoints)
 
 ### Phase 3: Realtime Trip Tracking
 **Goal**: While a trip request is pending or active, the rider always has an accurate, real-time view of trip status — and can cancel it at any point — even through a dropped or missed WebSocket connection, cold start, or reconnect.
@@ -81,6 +92,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 8/8 | Complete | 2026-08-12 |
-| 2. Fare Estimate & Booking | 0/TBD | Not started | - |
+| 2. Fare Estimate & Booking | 0/9 | Planned | - |
 | 3. Realtime Trip Tracking | 0/TBD | Not started | - |
 | 4. Trip Lifecycle & Completion | 0/TBD | Not started | - |
