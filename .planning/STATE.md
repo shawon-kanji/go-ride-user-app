@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 2 context gathered
-last_updated: "2026-08-12T12:56:14.691Z"
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-08-12T13:51:35.015Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 17
+  completed_plans: 9
 ---
 
 # Project State
@@ -19,13 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-11)
 
 **Core value:** A rider can reliably book and complete one cash trip end-to-end, without losing track of their trip state even through a dropped WebSocket connection or a silently-retried dispatch.
-**Current focus:** Phase 02 — fare-estimate-and-booking (Phase 01 complete)
+**Current focus:** Phase 02 — fare-estimate-booking
 
 ## Current Position
 
-Phase: 01 (foundation-auth) — COMPLETE
-Plan: 8 of 8 (all complete)
-Next: Phase 02 — Fare Estimate & Booking (not yet planned)
+Phase: 02 (fare-estimate-booking) — EXECUTING
+Plan: 2 of 9
 
 ## Performance Metrics
 
@@ -46,10 +45,11 @@ Next: Phase 02 — Fare Estimate & Booking (not yet planned)
 | Phase 01 P05 | 5min | 2 tasks | 6 files |
 | Phase 01 P06 | 8min | 3 tasks | 13 files |
 | Phase 01 P07 | 6min | 2 tasks | 7 files |
+| Phase 02 P01 | 5min | 3 tasks | 9 files |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-03 (5min), 01-04 (5min), 01-05 (5min), 01-06 (8min), 01-07 (6min)
+- Last 5 plans: 01-04 (5min), 01-05 (5min), 01-06 (8min), 01-07 (6min), 02-01 (5min)
 - Trend: -
 
 *Updated after each plan completion*
@@ -80,6 +80,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-auth]: Full suite baseline after 01-07: 72 tests across 13 suites (`npm test` exit 0), `npx tsc --noEmit` exit 0 — this is the number 01-08 uses as its phase-gate starting point.
 - [Phase 01-foundation-auth]: Plan 01-08 (phase gate) complete — first-ever `npx expo run:android` build succeeded (7m21s) and installed on a physical Galaxy S21 over Wi-Fi. Maps API key verified resolving into `AndroidManifest.xml` and its debug-keystore SHA-1 (`5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25`) registered against the shared key for `com.goride.rider`. AUTH-01..05 walked live by the user on real hardware against the real backend; AUTH-06 verified via its existing automated fake-timer test only (live wait explicitly waived by user). Phase 1 is now fully complete.
 - [Phase 01-foundation-auth]: Established physical-device-testing pattern for this machine: connect over Wi-Fi (not USB/adb-reverse), set `EXPO_PUBLIC_API_BASE_URL` to the laptop's LAN IP (found via `ipconfig getifaddr en0`), and if port 8081 is already occupied by another local service, start Metro explicitly on a free port (`npx expo start --port <N> --dev-client`) and connect the dev client to it manually — `expo run:android` silently skips starting its own bundler if anything already answers on 8081.
+- [Phase 02]: expo-location registered as bare-string config plugin (default Android permission set only, no background location); expo-crypto has no config plugin and was intentionally excluded from app.config.js plugins
+- [Phase 02]: Full suite baseline after 02-01: 14 suites / 81 tests (up from Phase 1's 13 suites / 72 tests); jest.mock('expo-location', ...) registered globally caused no change to any pre-existing Phase 1 test
 
 ### Pending Todos
 
@@ -93,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-08-12T12:56:14.687Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-fare-estimate-booking/02-CONTEXT.md
+Last session: 2026-08-12T13:51:35.011Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: None

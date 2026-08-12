@@ -18,8 +18,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Ride Booking
 
-- [ ] **RIDE-01**: Rider can get a fare estimate with an itemized breakdown (whatever fields `POST /fare-estimate` actually returns — verify before designing, don't fabricate) and a visible expiry countdown against the quote's `expires_at`
-- [ ] **RIDE-02**: Rider can book a cab against a fare quote, idempotently (`Idempotency-Key` header or body `idempotency_key`, reused across retries of the same intent so a slow response never creates a duplicate trip)
+- [x] **RIDE-01**: Rider can get a fare estimate with an itemized breakdown (whatever fields `POST /fare-estimate` actually returns — verify before designing, don't fabricate) and a visible expiry countdown against the quote's `expires_at`
+- [x] **RIDE-02**: Rider can book a cab against a fare quote, idempotently (`Idempotency-Key` header or body `idempotency_key`, reused across retries of the same intent so a slow response never creates a duplicate trip)
 - [ ] **RIDE-03**: Rider can cancel a pending or ongoing trip request with a reason, with the cancel affordance always reachable (not buried in a menu)
 
 ### Realtime Tracking
@@ -80,8 +80,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-04 | Phase 1 | Complete |
 | AUTH-05 | Phase 1 | Complete |
 | AUTH-06 | Phase 1 | Complete |
-| RIDE-01 | Phase 2 | Pending |
-| RIDE-02 | Phase 2 | Pending |
+| RIDE-01 | Phase 2 | Complete |
+| RIDE-02 | Phase 2 | Complete |
 | RIDE-03 | Phase 3 | Pending |
 | TRACK-01 | Phase 3 | Pending |
 | TRACK-02 | Phase 3 | Pending |

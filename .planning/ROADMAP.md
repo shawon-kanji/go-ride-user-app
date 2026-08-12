@@ -52,7 +52,7 @@ Plans:
 **Plans**: 9 plans across 9 waves (sequential — parallelization is disabled project-wide; 02-01 + 02-02 are the Wave 0 infrastructure, unusually large because this phase adds two new native dependencies and a second backend service, and neither may be assumed working before 02-02's on-device map check passes)
 
 Plans:
-- [ ] 02-01-PLAN.md — Install expo-location + expo-crypto, expo-location config plugin, EXPO_PUBLIC_CAB_API_BASE_URL, and the three missing Jest mocks (expo-crypto, expo-location, react-native-maps)
+- [x] 02-01-PLAN.md — Install expo-location + expo-crypto, expo-location config plugin, EXPO_PUBLIC_CAB_API_BASE_URL, and the three missing Jest mocks (expo-crypto, expo-location, react-native-maps)
 - [ ] 02-02-PLAN.md — Native rebuild (`prebuild --clean` + `run:android`) and an on-device bare-MapView smoke test proving react-native-maps works under RN 0.86's New Architecture (checkpoint)
 - [ ] 02-03-PLAN.md — cab-request-handler DTO types, purpose-built cab-client (`{error,message}`, no clearSession-on-401), newIdempotencyKey, booking draft store
 - [ ] 02-04-PLAN.md — useBookingIdempotencyKey (stable across retries), fare-estimate + request-cab mutations (header-only Idempotency-Key), cold-start-safe useRiderId
@@ -92,6 +92,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 8/8 | Complete | 2026-08-12 |
-| 2. Fare Estimate & Booking | 0/9 | Planned | - |
+| 2. Fare Estimate & Booking | 1/9 | In Progress | - |
 | 3. Realtime Trip Tracking | 0/TBD | Not started | - |
 | 4. Trip Lifecycle & Completion | 0/TBD | Not started | - |
