@@ -17,6 +17,10 @@ module.exports = {
       'expo-router',
       'expo-secure-store',
       'expo-splash-screen',
+      // Bare string form: the default Android permission set (ACCESS_FINE_LOCATION /
+      // ACCESS_COARSE_LOCATION) is all this phase needs — foreground one-shot GPS only.
+      // No background location, no custom rationale string (02-CONTEXT.md specifies none).
+      'expo-location',
       ['react-native-maps', { androidGoogleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY }],
     ],
     experiments: {
